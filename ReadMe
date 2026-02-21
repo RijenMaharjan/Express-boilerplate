@@ -1,1 +1,89 @@
 
+# 🚀 Express TypeScript Boilerplate
+
+[![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0-blue)](https://nodejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-%3E%3D4.9-blue)](https://www.typescriptlang.org/)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
+A production-ready **Express.js + TypeScript boilerplate** with:
+
+- Prisma ORM (PostgreSQL)
+- JWT Authentication (Access + Refresh Tokens)
+- Role-based access control
+- Socket.io for real-time communication
+- Structured logging with Pino
+- Zod validation + OpenAPI docs
+- Cookie handling
+- Clean architecture: Controller → Service → Repository → DTO → Model
+- Global error handling & standard API responses
+
+
+## ⚡ Installation
+
+1. Clone the repo:
+
+```bash
+git clone https://github.com/<your-username>/express-boilerplate.git
+cd express-boilerplate
+
+Install dependencies: npm install
+
+Install dev dependencies (TypeScript + types): npm install -D typescript ts-node ts-node-dev @types/node @types/cookie-parser
+
+Setup Prisma:
+- npx prisma generate
+- npx prisma migrate dev --name init
+
+Create .env:
+
+DATABASE_URL="postgresql://USER:PASSWORD@localhost:5432/mydb?schema=public"
+JWT_SECRET="your_jwt_secret"
+JWT_REFRESH_SECRET="your_jwt_refresh_secret"
+NODE_ENV=development
+PORT=5000
+🚀 Running the Project:
+Development
+npm run dev
+
+Uses ts-node-dev for hot-reload
+
+Production
+npm run build
+npm start
+
+Scripts:
+"scripts": {
+  "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+  "build": "tsc",
+  "start": "node dist/server.js",
+  "prisma:generate": "prisma generate",
+  "prisma:migrate": "prisma migrate dev",
+  "prisma:deploy": "prisma migrate deploy"
+}
+Authentication Endpoints
+
+Register: POST /api/v1/auth/register
+
+Login: POST /api/v1/auth/login
+
+Refresh Token: POST /api/v1/auth/refresh
+
+Logout: POST /api/v1/auth/logout
+
+Example Request (Register/Login):
+
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+
+Example Response:
+
+{
+  "success": true,
+  "message": "Login successful",
+  "data": {
+    "accessToken": "<jwt_access_token>",
+    "refreshToken": "<jwt_refresh_token>"
+  }
+}
